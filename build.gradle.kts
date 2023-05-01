@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "br.com.phs"
-version = "1.0-SNAPSHOT"
+version = "${property("application.version")}"
 
 repositories {
     mavenCentral()

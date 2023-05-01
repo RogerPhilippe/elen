@@ -1,11 +1,52 @@
 package br.com.phs
 
-import br.com.utils.CANCEL_EXIT
+import br.com.phs.utils.*
 import java.io.File
+import java.nio.file.Paths
 import java.util.*
 import kotlin.system.exitProcess
 
-fun main() {
+val envVars: MutableMap<String, String> = System.getenv()
+val homeDir = envVars["ELEN_HOME"]
+
+fun main(args: Array<String>?) {
+
+    if (args.isNullOrEmpty()) {
+        println(errorContent)
+        exitProcess(INVALID_ARGS_ERROR_EXIT)
+    }
+
+    if (args.size > 1) {
+        println(argumentsErrorContent)
+        exitProcess(INVALID_ARGS_ERROR_EXIT)
+    }
+
+    println(welcomeContent)
+
+    when {
+        "help" in args || "-h" in args -> { printHelpContent() }
+        "version" in args || "-v" in args -> { printVersion() }
+        "init" in args || "-i" in args -> { processUserEntrance() }
+        else -> {
+            println("Argument error. Please, to help type help or -h")
+            exitProcess(INVALID_ARGS_ERROR_EXIT)
+        }
+    }
+
+
+}
+
+private fun printVersion() {
+    println(welcomeContent)
+    exitProcess(EXIT_OK)
+}
+
+private fun printHelpContent() {
+    println(helpContent)
+    exitProcess(EXIT_OK)
+}
+
+private fun processUserEntrance() {
 
     val scanner = Scanner(System.`in`)
     val projectData: List<String>
@@ -30,7 +71,10 @@ fun main() {
     createBuildGradleKT(projectData)
     createMainKT(projectData)
 
-    File("./gradleres/").copyRecursively(File("./"))
+    val source = Paths.get("$homeDir/resources/gradleres")
+    val currentDir = Paths.get("").toAbsolutePath()
+
+    FileUtils.copyDirectory(source, currentDir)
 
 }
 

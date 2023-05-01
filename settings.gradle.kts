@@ -1,1 +1,1 @@
-rootProject.name = "GradleInit"
+rootProject.name = "elen"
