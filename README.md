@@ -1,6 +1,6 @@
 # elen * environment like node *
 ## Licença
-This project is licensed under the [GPL-3.0 License](LICENSE.txt)(https://github.com/elen/docs/LICENSE.txt).<br>
+This project is licensed under the [GPL-3.0 License](LICENSE.txt).<br>
 Gradle Init<br>
 Start project Kotlin with Gradle in comand line<br><br>
 Setup:<br>
