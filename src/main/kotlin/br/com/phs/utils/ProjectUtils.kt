@@ -1,7 +1,8 @@
 package br.com.phs.utils
 
-import java.io.*
-import java.nio.file.Paths
+import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
 import java.util.*
 
 fun getProjectProperties(): Properties {
@@ -40,6 +41,7 @@ fun addDependence(dependence: String) {
         lines.add(dependenciesIndex + 1, newDependency)
         buildFile.writeText(lines.joinToString("\n"))
         println("Dependency added successfully")
+        executeCommand("--refresh-dependencies")
     } else {
         println("Could not find the dependencies section in the file.")
     }
