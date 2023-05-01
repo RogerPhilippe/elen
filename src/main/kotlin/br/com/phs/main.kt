@@ -31,10 +31,25 @@ fun main(args: Array<String>?) {
         println("O aplicativo está sendo executado em: $currentPath")
     }
 
+    val (isAdd, index) = if (args.size == 2 && args[1].contains("add")) {
+        Pair(true, 1)
+    } else if (args[0].contains("add")) {
+        Pair(true, 0)
+    } else {
+        Pair(false, -1)
+    }
+
     when {
         "help" in args || "-h" in args -> { printHelpContent() }
         "version" in args || "-v" in args -> { printVersion() }
         "init" in args || "-i" in args -> { processUserEntrance() }
+        isAdd -> {
+            val dependence = args[index].substringAfter(":")
+            if (debugMode) {
+                println("Dependence: $dependence")
+            }
+            addDependence(dependence)
+        }
         "build" in args || "-b" in args -> { executeCommand("build") }
         "clean" in args || "-c" in args -> { executeCommand("clean") }
         "run" in args || "-r" in args -> { executeCommand("run") }

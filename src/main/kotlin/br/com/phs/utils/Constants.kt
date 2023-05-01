@@ -24,12 +24,13 @@ val argumentsErrorContent = """
 
 val helpContent = """
     |Type: 
-    |   [version -v] to show version
+    |   [version or -v] to show version
     |   [init or -i] to initialize a new Kotlin with Gradle project
     |   [help or -h] to show help
+    |   [add] to add dependency example add:com.example:example:1.0
     |   [build or -b] to build project
     |   [clean or -c] to clear project
     |   [run or -r] to start application
     |   [tests or -t] to execute all tests
-    |   [test:MainTest or -t:MainTest] to execute a specific test
+    |   [test or -t] to execute a specific test example test:MainTest or -t:MainTest
 """.trimMargin()

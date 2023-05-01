@@ -25,3 +25,23 @@ fun executeCommand(command: String) {
     }
 
 }
+
+fun addDependence(dependence: String) {
+
+    val currentDir = File("").absolutePath
+    val buildFile = File("$currentDir/build.gradle.kts")
+    val lines = buildFile.readLines().toMutableList()
+
+    val dependenciesIndex = lines.indexOfFirst { it.contains("dependencies") }
+    if (dependenciesIndex != -1) {
+        val newDependency = """
+        |    implementation("$dependence")
+        """.trimMargin()
+        lines.add(dependenciesIndex + 1, newDependency)
+        buildFile.writeText(lines.joinToString("\n"))
+        println("Dependency added successfully")
+    } else {
+        println("Could not find the dependencies section in the file.")
+    }
+
+}
