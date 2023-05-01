@@ -8,6 +8,7 @@ import kotlin.system.exitProcess
 
 val envVars: MutableMap<String, String> = System.getenv()
 val homeDir = envVars["ELEN_HOME"]
+private var debugMode = false
 
 fun main(args: Array<String>?) {
 
@@ -16,17 +17,27 @@ fun main(args: Array<String>?) {
         exitProcess(INVALID_ARGS_ERROR_EXIT)
     }
 
-    if (args.size > 1) {
+    if (!args.contains("-d") && args.size > 1) {
         println(argumentsErrorContent)
         exitProcess(INVALID_ARGS_ERROR_EXIT)
     }
 
-    println(welcomeContent)
+    debugMode = args.contains("-d")
+
+    if (debugMode) {
+        println("Arguments: ${args.joinToString(separator = ",")}")
+        println("HOME DIR: $homeDir")
+        val currentPath = Paths.get("").toAbsolutePath().toString()
+        println("O aplicativo está sendo executado em: $currentPath")
+    }
 
     when {
         "help" in args || "-h" in args -> { printHelpContent() }
         "version" in args || "-v" in args -> { printVersion() }
         "init" in args || "-i" in args -> { processUserEntrance() }
+        "build" in args || "-b" in args -> { executeCommand("build") }
+        "clean" in args || "-c" in args -> { executeCommand("clean") }
+        "run" in args || "-r" in args -> { executeCommand("run") }
         else -> {
             println("Argument error. Please, to help type help or -h")
             exitProcess(INVALID_ARGS_ERROR_EXIT)
@@ -47,6 +58,8 @@ private fun printHelpContent() {
 }
 
 private fun processUserEntrance() {
+
+    println(welcomeContent)
 
     val scanner = Scanner(System.`in`)
     val projectData: List<String>
@@ -73,6 +86,11 @@ private fun processUserEntrance() {
 
     val source = Paths.get("$homeDir/resources/gradleres")
     val currentDir = Paths.get("").toAbsolutePath()
+
+    if (debugMode) {
+        println("source: ${source.toAbsolutePath()}")
+        println("currentDir: ${currentDir.toAbsolutePath()}")
+    }
 
     FileUtils.copyDirectory(source, currentDir)
 

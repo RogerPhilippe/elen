@@ -28,8 +28,8 @@ val helpContent = """
     |   [init or -i] to initialize a new Kotlin with Gradle project
     |   [help or -h] to show help
     |   [build or -b] to build project
-    |   [clear or -c] to clear project
-    |   [start or -s] to start application
+    |   [clean or -c] to clear project
+    |   [run or -r] to start application
     |   [tests or -t] to execute all tests
     |   [test:MainTest or -t:MainTest] to execute a specific test
 """.trimMargin()
