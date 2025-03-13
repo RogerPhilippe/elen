@@ -135,19 +135,19 @@ private fun setup(scanner: Scanner): List<String> {
     val defaultVersion = "1.0-SNAPSHOT"
     println("Initializing Gradle Kotlin Project.")
 
-    print("Type project nema [$defaultProjectName]: ")
+    print("Type project name [$defaultProjectName]: ")
     var projectName = scanner.nextLine()
     if (projectName.isNullOrEmpty()) {
         projectName = defaultProjectName
     }
 
-    print("Type package nema [$defaultPackageName]: ")
+    print("Type package name [$defaultPackageName]: ")
     var packageName = scanner.nextLine()
     if (packageName.isNullOrEmpty()) {
         packageName = defaultPackageName
     }
 
-    print("Type package nema [$defaultVersion]: ")
+    print("Type package name [$defaultVersion]: ")
     var version = scanner.nextLine()
     if (version.isNullOrEmpty()) {
         version = defaultVersion
